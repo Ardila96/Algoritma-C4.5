@@ -126,7 +126,7 @@ rpart.plot(tress)
 # Referensi
 1. https://rpubs.com/anubratadas/769026
 2. https://rpubs.com/Ardila
-3. https://github.com/Ardila96/Algoritma-C4.5.git
+3. https://github.com/Ardila96/Algoritma-C4.5
 4. https://www.kaggle.com/code/parulpandey/penguin-dataset-the-new-iris/notebook
 5. https://medium.com/analytics-vidhya/visualizing-decision-tree-with-r-774f58ac23c
 
