@@ -1,0 +1,112 @@
+---
+title: Algoritma C4.5 With R
+author: Ardila Cindy Vayuanita-Institut Teknologi Statistika dan Bisnis Muhammadiyah
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+bibliography: references.bib
+---
+
+```{=html}
+<style>
+body{
+text-align: justify}
+</style>
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Algoritma C4.5
+
+# Pengertian Algoritma C4.5
+Algoritma C4.5 merupakan algoritma yang digunakan untuk membentuk pohon keputusan (Decision Tree). Algoritma C4.5 menggunakan klasifikasi data dengan teknik pohon keputusan yang dapat mengolah data numerik (kontinu) dan diskrit. 
+Algoritma C4.5 adalah membuat suatu klasifikasi dengan menghasilkan sebuah pola dan polanya dapat digunakan untuk prediksi (kuliah teknokrat, 2020).
+Menurut Quinlan algoritma C4.5 adalah algoritma yang paling terkenal (Pramudiono, 2003).
+Algoritma C4.5 merupakan pengembangan dari algoritma ID3, Proses pada pohon keputusan adalah mengubah bentuk data (tabel) menjadi model pohon.
+
+# Tahapan Algoritma C4.5
+1. Siapkan Dataset
+
+2. Menghitung Entropy Total di Dataset
+
+3. Menghitung Entropy, Gain, SplitInfo, dan GainRatio untuk masing-masing atribut.
+
+4. Mencari  nilai GainRatio tertinggi dan membuat pohon keputusan sementara. 
+
+5. Membuat Node selanjutnya dengan mengulangi langkah-langkah diatas hingga pohon keputusan selesai dan dapat dibuat kesimpulan.
+
+# Eksperimen Algoritma C4.5
+## Read Dataset
+```{r}
+library(caret)
+```
+
+```{r}
+library(rpart.plot)
+```
+
+```{r}
+library(readxl)
+Data_penguin <- read_excel("C:/Users/WINDOWS 10/Downloads/Data penguin.xlsx")
+View(Data_penguin)
+```
+
+```{r}
+summary(Data_penguin)
+```
+
+```{r}
+str(Data_penguin)
+```
+
+```{r}
+set.seed(3033)
+intrain <- createDataPartition(y = Data_penguin$Species, p= 0.7, list = FALSE)
+training <- Data_penguin[intrain,]
+testing <- Data_penguin[-intrain,]
+dim(training);dim(testing)
+```
+
+## Pohon Keputusan
+
+```{r}
+trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+ set.seed(3333)
+ dtree_fit_info <- train(Species ~., data = Data_penguin, method = "rpart",
+                    parms = list(split = "information"),
+                    trControl=trctrl,
+                    tuneLength = 10)
+ prp(dtree_fit_info$finalModel, box.palette="Reds", tweak=1.2)
+```
+```{r}
+set.seed(3333)
+ dtree_fit_gini <- train(Species ~., data = Data_penguin, method = "rpart",
+                         parms = list(split = "gini"),
+                         trControl=trctrl,
+                         tuneLength = 10)
+ prp(dtree_fit_gini$finalModel,box.palette = "Blues", tweak = 1.2)
+
+```
+
+
+
+```{r}
+library(rpart)
+library(rpart.plot)
+tress<-rpart(Species ~., data = Data_penguin, method = 'class' )                  
+rpart.plot(tress)
+```
+
+
+
+
+# Referensi
+1. https://rpubs.com/anubratadas/769026
+2. https://medium.com/analytics-vidhya/visualizing-decision-tree-with-r-774f58ac23c
+3. https://rpubs.com/Ardila
+4. https://www.kaggle.com/code/parulpandey/penguin-dataset-the-new-iris/notebook
+

@@ -22,15 +22,64 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Algoritma C4.5
+# Pengertian Algoritma C4.5
 Algoritma C4.5 merupakan algoritma yang digunakan untuk membentuk pohon keputusan (Decision Tree). Algoritma C4.5 menggunakan klasifikasi data dengan teknik pohon keputusan yang dapat mengolah data numerik (kontinu) dan diskrit. 
 Algoritma C4.5 adalah membuat suatu klasifikasi dengan menghasilkan sebuah pola dan polanya dapat digunakan untuk prediksi (kuliah teknokrat, 2020).
 Menurut Quinlan algoritma C4.5 adalah algoritma yang paling terkenal (Pramudiono, 2003).
 Algoritma C4.5 merupakan pengembangan dari algoritma ID3, Proses pada pohon keputusan adalah mengubah bentuk data (tabel) menjadi model pohon ( ilmuskripsi.com).
 
-
 # Tahapan Algoritma C4.5
+1. Siapkan Dataset
+
+2. Menghitung Entropy Total di Dataset
+
+3. Menghitung Entropy, Gain, SplitInfo, dan GainRatio untuk masing-masing atribut.
+
+4. Mencari  nilai GainRatio tertinggi dan membuat pohon keputusan      sementara. 
+5. Membuat Node selanjutnya dengan mengulangi langkah-langkah diatas hingga pohon keputusan selesai dan dapat dibuat kesimpulan.
 
 # Eksperimen Algoritma C4.5
+
+## Library
+## Read Dataset
+```{r}
+library(caret)
+```
+
+```{r}
+library(rpart.plot)
+```
+```{r}
+library(readxl)
+Golf <- read_excel("~/Data Mining/dataset/Golf.xls")
+View(Golf)
+```
+
+```{r}
+summary(Golf)
+```
+
+```{r}
+str(Golf)
+```
+```{r}
+set.seed(3033)
+intrain <- createDataPartition(y = Golf$Play, p= 0.7, list = FALSE)
+training <- Golf[intrain,]
+testing <- Golf[-intrain,]
+dim(training);dim(testing)
+```
+
+## Pohon Keputusan
+```{r}
+library(rpart)
+library(rpart.plot)
+tress<-rpart(Play ~., data = Golf, method = 'class' )
+rpart.plot(tress)
+```
+
+
+
+
 
 # Referensi
