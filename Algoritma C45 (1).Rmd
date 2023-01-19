@@ -4,7 +4,7 @@ author: Ardila Cindy Vayuanita-Institut Teknologi Statistika dan Bisnis Muhammad
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
-    theme: architect
+    theme: hpstr
     highlight: github
 bibliography: references.bib
 ---
@@ -31,16 +31,34 @@ Algoritma C4.5 merupakan pengembangan dari algoritma ID3, Proses pada pohon kepu
 # Tahapan Algoritma C4.5
 1. Siapkan Dataset
 
-2. Menghitung Entropy Total di Dataset
+2. Menghitung Entropy Total di Dataset.
 
-3. Menghitung Entropy, Gain, SplitInfo, dan GainRatio untuk masing-masing atribut.
+   $\operatorname{Entropy}(\mathrm{S})=\sum_{i=1}^n-p i \times \log _2 p i$
+
+3. Menghitung Entropy, Gain, SplitInfo, dan GainRatio untuk masing-masing label.
+
+- Mengitung Entropy
+
+  $\operatorname{Entropy}(\mathrm{S})=\sum_{i=1}^n-p i \times \log _2 p i$
+
+- Menghitung Gain
+
+  $\operatorname{Gain}(S, A)=\operatorname{Entropy}(S)-\sum_{i=1}^n \frac{\mid \text   { Si } \mid}{|S|} \times \operatorname{Entropy}($ Si $)$
+
+- Menghitung SplitInfo
+
+  $\operatorname{SplitInfo}(S, A)=\sum_{i=1}^n-\frac{\left|S_i\right|}{|S|} \log _2   \frac{\left|S_i\right|}{|S|}$
+
+- Menghiung GainRatio
+
+  $GainRatio =\frac{\text { Gain }}{\text { SplitInfo }}$
 
 4. Mencari  nilai GainRatio tertinggi dan membuat pohon keputusan sementara. 
 
 5. Membuat Node selanjutnya dengan mengulangi langkah-langkah diatas hingga pohon keputusan selesai dan dapat dibuat kesimpulan.
 
 # Eksperimen Algoritma C4.5
-## Read Dataset
+## Library
 ```{r}
 library(caret)
 ```
@@ -49,6 +67,7 @@ library(caret)
 library(rpart.plot)
 ```
 
+## Import Dataset
 ```{r}
 library(readxl)
 Data_penguin <- read_excel("C:/Users/WINDOWS 10/Downloads/Data penguin.xlsx")
@@ -106,7 +125,8 @@ rpart.plot(tress)
 
 # Referensi
 1. https://rpubs.com/anubratadas/769026
-2. https://medium.com/analytics-vidhya/visualizing-decision-tree-with-r-774f58ac23c
-3. https://rpubs.com/Ardila
+2. https://rpubs.com/Ardila
+3. https://github.com/Ardila96/Algoritma-C4.5.git
 4. https://www.kaggle.com/code/parulpandey/penguin-dataset-the-new-iris/notebook
+5. https://medium.com/analytics-vidhya/visualizing-decision-tree-with-r-774f58ac23c
 

@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/993306/2c67780a1d72472a90b22e1495bf5241
+bundleId: https://api.rpubs.com/api/v1/document/993306/2c67780a1d72472a90b22e1495bf5241
+url: http://rpubs.com/Ardila/993306/edit
+when: 1674105767.61894
+lastSyncTime: 1674105767.61896
